@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './SearchBar.module.css'
 
-function SearchBar(props) {
+export function SearchBar(props) {
+  const [term, setTerm] = useState(props.term || '');
+  const [location, setLocation] = useState(props.location || '');
+
+  function submit(e) {
+    console.log(term, location);
+    e.preventDefault();
+  }
+
   const sizeClass = props.small ? '' : 'is-medium';
     return (
-      <div>
+      <form onSubmit={submit}>
         <div className="field has-addons">
           <p className="control">
             <button className={`button is-static ${sizeClass}`}>
@@ -14,30 +22,32 @@ function SearchBar(props) {
           <p className="control">
             <input
               className={`input ${sizeClass} ${styles["input-control"]}`}
+              onChange={(e) => setTerm(e.target.value)}
               type="text"
               placeholder="plumbers, delivery, takeout..."
             />
           </p>
-          <p className="control">
-            <button className={`button is-static ${sizeClass}`}>
+          <div className="control">
+            <div className={`button is-static ${sizeClass}`}>
               <b>Near</b>
-            </button>
-          </p>
+            </div>
+          </div>
           <p className="control">
             <input
               className={`input ${sizeClass} ${styles["input-control"]}`}
+              onChange={(e) => setLocation(e.target.value)}
               type="text"
               placeholder="Where"
             />
           </p>
-          <div className={`button ${sizeClass} ${styles["search-button"]}`}>
+          <div className={`button ${sizeClass} ${styles["search-button"]}`} onClick={submit}>
             <span className={`icon is-small ${styles["search-icon"]}`}>
               <i className="fas fa-search"></i>
             </span>
           </div>
         </div>
-      </div>
+      </form>
     );
 }
 
-export default SearchBar
+

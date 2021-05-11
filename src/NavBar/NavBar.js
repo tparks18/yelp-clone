@@ -1,7 +1,8 @@
 import React from 'react';
 import logo from '../assets/yelp-logo-transparent-background-4.png'
-import SearchBar from '../SearchBar/SearchBar';
+import { SearchBar } from '../SearchBar/SearchBar';
 import styles from './NavBar.module.css';
+
 
 export function NavBar() {
     return (
